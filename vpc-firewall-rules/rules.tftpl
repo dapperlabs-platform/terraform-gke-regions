@@ -1,0 +1,16 @@
+https:
+  allow:
+    - ports:
+        - 443
+        - 8443
+        - 9443
+        # Lens queries the prometheus pod through kubectl proxy that routes requrests from the master network
+        - 9090
+      protocol: tcp
+  direction: INGRESS
+  disabled: false
+  priority: 1000
+  source_ranges:
+    # Application cluster master_ipv4_cidr_block
+    - ${master_ipv4_cidr_block}
+  target_tags: []
