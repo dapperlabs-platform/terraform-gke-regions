@@ -49,14 +49,3 @@ module "gke_application_cluster_nodepools_regions" {
     module.gke_application_cluster_regions.name
   ]
 }
-
-module "gke_application_cluster_firewall_regions" {
-  source     = "github.com/dapperlabs-platform/terraform-google-net-vpc-firewall-yaml?ref=enable-passing-config-file-contents"
-  project_id = var.common_config.project_id
-  network    = module.gke_vpc_regions.name
-
-  # Take the template file in the vpc-firewall-rules folder and replace the variable in there
-  # with the CIDR block for this region's control plane nodes
-  config_file_content = [templatefile("${path.module}/vpc-firewall-rules/rules.tftpl", { master_ipv4_cidr_block = var.gke_networking.master_ipv4_cidr_block })]
-}
-
