@@ -14,7 +14,7 @@ resource "cloudflare_list_item" "bypass_list_additions" {
   for_each   = module.gke_vpc_nat_addresses_regions[var.region].external_addresses
   account_id = local.cloudflare_account_id
   list_id    = data.cloudflare_list.bypass_list.id
-  comment    = replace("${var.common_config.project_id} ${var.region} IP ${each.key}", "nat-", "")
+  comment    = "${var.common_config.project_id} ${each.key}"
   ip         = each.value.address
 }
 
