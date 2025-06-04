@@ -9,12 +9,6 @@ variable "common_config" {
     environment = string # env: like staging or prod
     project_id  = string # the GCP project to deploy resources into
 
-    # The workload identity profiles to use for each cluster
-    gke_workload_identity_profiles = map(list(object({
-      email                           = string,
-      automount_service_account_token = optional(bool)
-    })))
-
     # Which IP ranges are allowed to communicate with the control plane
     gke_master_authorized_ranges = map(string)
 
@@ -44,9 +38,6 @@ variable "common_config" {
       enable_private_endpoint = bool
       master_global_access    = bool
     })
-
-    # Which namespaces to create in the cluster
-    gke_namespaces = list(string)
   })
 }
 

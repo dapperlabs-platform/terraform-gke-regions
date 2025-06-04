@@ -1,8 +1,5 @@
 module "gke_application_cluster_regions" {
-  source = "github.com/dapperlabs-platform/terraform-google-gke-cluster?ref=v0.10.2"
-  providers = {
-    kubernetes = kubernetes.regions
-  }
+  source = "github.com/dapperlabs-platform/terraform-google-gke-cluster?ref=v0.10.3"
 
   project_id                   = var.common_config.project_id
   name                         = "${var.region}-application"
@@ -16,15 +13,13 @@ module "gke_application_cluster_regions" {
   authenticator_security_group = "gke-security-groups@dapperlabs.com"
 
 
-  addons                     = try(var.common_config.gke_addons, {})
-  node_locations             = var.gke_node_locations
-  master_authorized_ranges   = var.common_config.gke_master_authorized_ranges
-  private_cluster_config     = merge(var.common_config.gke_private_cluster_config, { master_ipv4_cidr_block = var.gke_networking.master_ipv4_cidr_block })
-  labels                     = try(var.common_config.gke_labels, {})
-  namespaces                 = var.common_config.gke_namespaces
-  workload_identity_profiles = var.common_config.gke_workload_identity_profiles
-  vertical_pod_autoscaling   = try(var.common_config.gke_vertical_pod_autoscaling, false)
-  secondary_region           = true
+  addons                   = try(var.common_config.gke_addons, {})
+  node_locations           = var.gke_node_locations
+  master_authorized_ranges = var.common_config.gke_master_authorized_ranges
+  private_cluster_config   = merge(var.common_config.gke_private_cluster_config, { master_ipv4_cidr_block = var.gke_networking.master_ipv4_cidr_block })
+  labels                   = try(var.common_config.gke_labels, {})
+  vertical_pod_autoscaling = try(var.common_config.gke_vertical_pod_autoscaling, false)
+  secondary_region         = true
 }
 
 module "gke_application_cluster_nodepools_regions" {
