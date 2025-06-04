@@ -13,21 +13,5 @@ terraform {
       source  = "hashicorp/google-beta"
       version = ">= 6.0"
     }
-    kubernetes = {
-      source                = "hashicorp/kubernetes"
-      version               = ">= 2.20"
-      configuration_aliases = [kubernetes.regions]
-    }
   }
-}
-
-data "google_client_config" "provider" {}
-
-provider "kubernetes" {
-  alias = "regions"
-  host  = "https://${module.gke_application_cluster_regions.endpoint}"
-  token = data.google_client_config.provider.access_token
-  cluster_ca_certificate = base64decode(
-    module.gke_application_cluster_regions.ca_certificate,
-  )
 }

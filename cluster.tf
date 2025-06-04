@@ -1,8 +1,5 @@
 module "gke_application_cluster_regions" {
-  source = "github.com/dapperlabs-platform/terraform-google-gke-cluster?ref=v0.10.2"
-  providers = {
-    kubernetes = kubernetes.regions
-  }
+  source = "github.com/dapperlabs-platform/terraform-google-gke-cluster?ref=v0.10.3"
 
   project_id                   = var.common_config.project_id
   name                         = "${var.region}-application"
