@@ -20,6 +20,7 @@ module "gke_application_cluster_regions" {
   labels                   = try(var.common_config.gke_labels, {})
   vertical_pod_autoscaling = try(var.common_config.gke_vertical_pod_autoscaling, false)
   secondary_region         = true
+  namespace_protection     = false
 }
 
 module "gke_application_cluster_nodepools_regions" {
